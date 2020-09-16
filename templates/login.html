@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block login %}
+<link rel="stylesheet" href=" {{ url_for('static', filename='main.css') }} ">
+{% endblock login %}
+
+{% block content %}
+<div class="container">
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab"><a href="#login">Login</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="signup">
+                <form method="POST" action="" novalidate>
+                    {{ register_form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ register_form.github_link.label(class="form-control-label") }}
+
+                        {% if not register_form.github_link.data %}
+                        {{ register_form.github_link(class="form-control",placeholder="https://github.com/username") }}
+
+                        {% elif register_form.github_link.errors %}
+                        {{ register_form.github_link(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in register_form.github_link.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ register_form.github_link(class="form-control form-control-lg is-valid") }}
+                        <div class="valid-feedback">
+                            This account was found!
+                        </div>
+                        {% endif %}
+                        <small class="form-text text-muted">Paste the github profile link</small>
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ register_form.name.label(class="form-control-label") }}
+
+                        {% if not register_form.name.data %}
+                        {{ register_form.name(class="form-control",placeholder="Your Name") }}
+
+                        {% elif register_form.name.errors %}
+                        {{ register_form.name(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in register_form.name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ register_form.name(class="form-control form-control-lg is-valid") }}
+                        <div class="valid-feedback">
+                            This Name is available
+                        </div>
+                        {% endif %}
+                        <small class="form-text text-muted">This is the display Name.</small>
+                    </div>
+
+                    <div class="form-group">
+                        {{ register_form.team.label() }}
+
+                        {{ register_form.team(class="custom-select") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ register_form.submit(class="btn btn-primary",disabled=False) }}
+                    </div>
+                </form>
+            </div>
+            <div id="login">
+                <form method="POST" action="" novalidate>
+                    {{ login_form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ login_form.github_link.label(class="form-control-label") }}
+
+                        {% if not login_form.github_link.data %}
+                        {{ login_form.github_link(class="form-control",placeholder="https://github.com/username") }}
+
+                        {% elif login_form.github_link.errors %}
+                        {{ login_form.github_link(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in login_form.github_link.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ login_form.github_link(class="form-control form-control-lg is-valid") }}
+                        <div class="valid-feedback">
+                            This account was found!
+                        </div>
+                        {% endif %}
+                        <small class="form-text text-muted">Paste the github profile link</small>
+
+                    </div>
+                    <div class="form-group">
+                        {{ login_form.submit(class="btn btn-primary",disabled=False) }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

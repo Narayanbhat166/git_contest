@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet">
+        {% block login %}
+        {% endblock %}
+        
+    
+    
+    {% if title %} <title>
+        {{title}}</title>
+    {% else %}
+    <title>Default</title>
+    {% endif %}
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <img src="https://media-exp1.licdn.com/dms/image/C560BAQH8r3DurbOKjQ/company-logo_200_200/0?e=1607558400&v=beta&t=kzrHQ4kWKXMRSLRMruFyKeauZ4HWMB9RTUpZxbyxFXE" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+          <span class="header_text"> Linux  Campus  Club </span>
+        </a>
+      </nav>
+    <!--  -->
+   
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock%}
+
+     <!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+
+    <!-- Footer Elements -->
+    
+    <div class="footer_container">
+  
+     <span>Developed @ LCC-JSSSTU by <a href="https://github.com/rituraj735"> Ritu Raj </a> and  <a href="https://github.com/Narayanbhat166"> Narayan Bhat </a> </span>
+     <span class="tech_support">Contact: 9102009256 / 9483717117</span> 
+    </div>
+    <!-- Footer Elements -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <span> LCC-JSSSTU</span>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.1/css/jquery.dataTables.css"></script>
+    <script src="https://cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css"></script>
+    <script src="https://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.js"></script>
+    
+    
+     <script src="{{ url_for('static' , filename='effects.js' ) }}"></script>
+     
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    
+        </script>
+</body>
+
+</html>

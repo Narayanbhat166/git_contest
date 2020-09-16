@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+
+{%block login %}
+        <link rel="stylesheet" href=" {{ url_for('static', filename='login.css') }} ">
+{% endblock login%}
+
+{% block content %}
+
+
+<div class="wrap_it_up">
+<div class="container leader">
+
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">Checkpoint #{{checkpoint['number']}} <span class="point">points
+                {{checkpoint['points']}}</span></div>
+        <div class="card-body text-dark">
+            <h5 class="card-title">{{checkpoint['title']}}</h5>
+
+            <form method="POST" action={{ checkpoint['link'] }}>
+                <p class="card-text">{{checkpoint['description'] | safe}}</p>
+                <button class="btn btn-primary" type="submit">Check Progress</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="heading">
+    <h2><b>Leader Board</b></h2>
+    <h3>Participants</h3>
+</div>
+<table class="table " id="participants">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Github Name</th>
+            <th scope="col">Team</th>
+            <th scope="col">Score</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for user in users %}
+        {% if user['github_name']== current_user %}
+        <tr style="background-color:white;">
+            <th scope="row">{{ user['rank'] }}</th>
+            <td>{{ user['display_name'] }}</td>
+            <td>{{ user['github_name'] }}</td>
+            <td>{{ user['team'] }}</td>
+            <td>{{ user['score'] }}</td>
+
+        </tr>
+
+        {% else %}
+        <tr>
+            <th scope="row">{{ user['rank'] }}</th>
+            <td>{{ user['display_name'] }}</td>
+            <td>{{ user['github_name'] }}</td>
+            <td>{{ user['team'] }}</td>
+            <td>{{ user['score'] }}</td>
+
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+    </tbody>
+    <hr>
+    <tr style="background-color:rgba(145, 245, 190, 0.63); margin-top=5px">
+        <th scope="row">{{ current_user_dict['rank'] }}</th>
+        <td>{{ current_user_dict['display_name'] }}</td>
+        <td>{{ current_user_dict['github_name'] }}</td>
+        <td>{{ current_user_dict['team'] }}</td>
+        <td>{{ current_user_dict['score'] }}</td>
+
+    </tr>
+</table>
+<hr>
+<div class="heading">
+    <h3>Team</h3>
+</div>
+<table class="table" id="teams">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Team Name</th>
+            <th scope="col">Members count</th>
+            <th scope="col">Score</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for team in teams %}
+
+        {% if team['name']== current_team %}
+        <tr style="background-color:white;">
+            <th scope="row">{{ team['rank'] }}</th>
+            <td>{{ team['name'] }}</td>
+            <td>{{ team['members'] }}</td>
+            <td>{{ team['score'] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <th scope="row">{{ team['rank'] }}</th>
+            <td>{{ team['name'] }}</td>
+            <td>{{ team['members'] }}</td>
+            <td>{{ team['score'] }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock content %}

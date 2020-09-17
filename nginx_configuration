@@ -1,0 +1,37 @@
+#nginx acts as a load balancer
+
+#custom log format
+log_format serviceslog '[$time_local] $remote_addr $server_name to $upstream_addr [$request] '
+	'request_time $request_time $http_user_agent';
+
+#Run three services of the application to handle concurrent requests, these are run by gunicorn
+#Use the round-robin algorithm to balance the requests to applications
+upstream services {
+	server localhost:5000;
+	server localhost:5001;
+	server localhost:5002;
+}
+
+#the servr block
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	
+	access_log /home/narayan/nginx_loadbalalncer_logs.log serviceslog;
+	server_name nginx;
+
+	#server static files by nginx directly
+
+	location /static {
+		root /home/narayan;
+	}
+
+	#proxy pass all other requests to backend pool of applications
+	location / {
+		proxy_pass http://services;
+	}
+
+}
+

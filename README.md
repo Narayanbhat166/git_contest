@@ -17,7 +17,7 @@ This application is developed on the flask framework, uses the github api to tra
 * We had the github event in our college(conducted by Linux Campus Club), many users registered(50+) to this contest and completed all the checkpoints.
 
 ## Few screenshots
-[The final leaderboard](/screenshots/leaderboard1.png)
+[The final leaderboard](/screenshots/leaderboard1.png =768x432)
 [Register Page](/screenshots/register_page.png)
 [Leaderboard](/screenshots/leaderboard2.png)
 [Leaderboard](/screenshots/leaderboard3.png)
